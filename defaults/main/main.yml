@@ -226,3 +226,25 @@ celery_version: 3.1.17
 # list of items following the structure provided in the example comment
 # dags_dependencies:
 #   - {name: pip_package, version: version_needed}
+
+
+airflow_connections:
+  # conn_name:
+  #   conn_type: #https://airflow.apache.org/docs/apache-airflow-providers/index.html
+  #   description:
+  #   host: 
+  #   login:
+  #   password:
+  #   schema:
+  #   port:
+  #   extra:
+airflow_pools:
+  default_pool:
+    description: "Default pool"
+    slots: 128
+  # pool_name:
+  #   description:
+  #   slots: 10
+airflow_variables:
+  # variable_name: [Variable Value]
+

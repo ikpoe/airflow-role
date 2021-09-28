@@ -23,3 +23,21 @@
   tags:
     - service
     - airflow_service
+
+- name: Airflow | Connections
+  import_tasks: connections.yml
+  tags:
+    - connections
+    - airflow_connections
+
+- name: Airflow | Pools
+  import_tasks: pools.yml
+  tags:
+    - pools
+    - airflow_pools
+
+- name: Airflow | Variables
+  import_tasks: variables.yml
+  tags:
+    - variables
+    - airflow_variables

@@ -1,0 +1,28 @@
+- name: Airflow | Copy pools config file (>= 2.0)
+  template:
+    src: "airflow_pools.json.j2"
+    dest: "{{ airflow_conf_path }}/airflow_pools.json"
+    owner: "{{ airflow_user }}"
+    group: "{{ airflow_group }}"
+    mode: 0640
+  when: airflow_version is version( '2.0.0', '>=')
+  tags: 
+    - pools
+    - airflow_pools
+
+
+- name: Airflow | Import pools Config (> 2.0)
+  become: true
+  become_user: "{{ airflow_user }}"
+  command:
+    argv:
+      - "{{ airflow_executable }}"
+      - pools
+      - import
+      - "{{ airflow_conf_path }}/airflow_pools.json"
+  when:
+    - airflow_version is version( '2.0.0', '>=')
+    - airflow_pools != None
+  tags: 
+    - pools
+    - airflow_pools

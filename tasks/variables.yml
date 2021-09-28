@@ -1,0 +1,28 @@
+- name: Airflow | Copy variables config file (>= 2.0)
+  template:
+    src: "airflow_variables.json.j2"
+    dest: "{{ airflow_conf_path }}/airflow_variables.json"
+    owner: "{{ airflow_user }}"
+    group: "{{ airflow_group }}"
+    mode: 0640
+  when: airflow_version is version( '2.0.0', '>=')
+  tags: 
+    - variables
+    - airflow_variables
+
+
+- name: Airflow | Import variables Config (> 2.0)
+  become: true
+  become_user: "{{ airflow_user }}"
+  command:
+    argv:
+      - "{{ airflow_executable }}"
+      - variables
+      - import
+      - "{{ airflow_conf_path }}/airflow_variables.json"
+  when:
+    - airflow_version is version( '2.0.0', '>=')
+    - airflow_variables != None
+  tags: 
+    - variables
+    - airflow_variables
